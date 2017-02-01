@@ -1,8 +1,3 @@
-Edit in JSFiddle
-Result
-HTML
-JavaScript
-CSS
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~120 effective lines of JavaScript.
 

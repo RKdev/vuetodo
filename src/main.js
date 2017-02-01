@@ -2,9 +2,9 @@
 import Vue from 'vue';
 require('../index.html');
 
-window.app1 = new Vue(
+window.component1 = new Vue(
   {
-    el: '#component-1',
+    el: '#component1',
     data:{
       message: "Hello, World!"
     }
