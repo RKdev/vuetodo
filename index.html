@@ -4,10 +4,41 @@
     <title>VueTodo</title>
   </head>
   <body>
+    <section> <h6>SECTION: todo input box</h6>
+      <header><h6>Header</h6>
+        <h1>todos</h1>
+        <input>New Todo</br><h6>end header</h6>
+      </header>
+      </section>
+      <section>
+        <h6>SECTION: todo list</h6>
+        <input type="checkbox">Toggle all
+        <ul>
+          <li>
+            <div></div>
+            <input>List Item Template
+          </li>
+        </ul>
+      </section>
+      <!-- This footer was orginally inside top section. Not sure why. Leaving it here for now -->
+      <!-- If I leave it as a "footer", I suppose that makes sense -->
+      <!-- But I want to understand why it should be a footer instead of just a div -->
+      <footer><h6>SECTION Footer</h6>
+        <span><h5>Todo Count</h5></span>
+        <ul><h5>Filters</h5>
+          <li>All</li>
+          <li>Active</li>
+          <li>Completed</li>
+        </ul>
+        <button>Clear completed</button>
+      </footer>
 
-    <div id="component1">
-      {{ message }}
-    </div>
+      <footer><h6>DOCUMENT Footer</h6>
+      <p>Double-click to edit a todo</p>
+      <p>Attribution info here: </p>
+      <p>Attribution info here:</p>
+    </br><h6>End footer</h6>
+    </footer>
     <script src="./dist/build.js"></script>
   </body>
 </html>
