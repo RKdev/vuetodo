@@ -2,11 +2,11 @@
 import Vue from 'vue';
 require('../index.html');
 
-window.component1 = new Vue(
+window.helloworld = new Vue(
   {
-    el: '#component1',
+    el: '#helloworld',
     data:{
-      message: "Hello, World!"
+      helloworld: "Hello, World!"
     }
   }
 );
