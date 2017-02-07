@@ -7,7 +7,7 @@
     <section id="todoapp" class="todoapp"> <h6>SECTION: todo input box</h6>
       <header><h6>Header</h6>
         <h1>todos</h1>
-          <input v-model="newTodo" @keyup.enter="addTodo"><br/>
+          <input v-model="newTodo" @keyup.enter="addTodo" @keydown.esc="clearTodo"><br/>
         <p>{{ newTodo }}</p>
         <h6>end header</h6>
       </header>

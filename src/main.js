@@ -13,13 +13,20 @@ window.app = new Vue({
   filters:{},
   methods:{
     addTodo: function() {
+      if (this.newTodo === '') {
+        return(1);
+      }
       this.todos.push(
         this.newTodo
       );
       this.newTodo = '';
+      return(0);
     },
     removeTodo: function (todo) {
         this.todos.splice(this.todos.indexOf(todo),1);
+    },
+    clearTodo: function(){
+      this.newTodo = '';
     }
   },
   directives:{}
