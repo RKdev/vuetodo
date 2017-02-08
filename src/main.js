@@ -13,8 +13,8 @@ window.app = new Vue({
   filters:{},
   methods:{
     addTodo: function() {
-      var value = this.newTodo.trim();
-      if (value === '') {
+      var value = this.newTodo && this.newTodo.trim();
+      if (!value) {
         console.log('newTodo: empty');
         return(1);
       }
