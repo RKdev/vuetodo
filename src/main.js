@@ -13,11 +13,12 @@ window.app = new Vue({
   filters:{},
   methods:{
     addTodo: function() {
-      if (this.newTodo === '') {
+      var value = this.newTodo.trim();
+      if (value === '') {
         console.log('newTodo: empty');
         return(1);
       }
-      var value = this.newTodo;
+
       this.todos.push({
         title: value,
         completed: false
