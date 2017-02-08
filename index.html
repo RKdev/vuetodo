@@ -4,18 +4,16 @@
     <title>VueTodo</title>
   </head>
   <body>
-    <section id="todoapp" class="todoapp"> <h6>SECTION: todo input box</h6>
-      <header><h6>Header</h6>
+    <section id="todoapp" class="todoapp">
+      <header>
         <h1>todos</h1>
           <input
           v-model="newTodo"
           @keyup.enter="addTodo"
           @keydown.esc="clearTodo"><br/>
         <p>{{ newTodo }}</p>
-        <h6>end header</h6>
       </header>
       <section>
-        <h6>SECTION: todo list</h6>
         <input type="checkbox">Toggle all
         <ul>
           <li v-for="todo in todos">
@@ -34,9 +32,9 @@
       <!-- Update, I understand now. The top section represents the DOM element -->
       <!-- That the VUE component is mounted to. It has to close here so the rest of the -->
       <!-- document will be in scope -->
-      <footer><h6>SECTION Footer</h6>
+      <footer>
         <span><h5>Todo Count</h5></span>
-        <ul><h5>Filters</h5>
+        <ul>
           <li>All</li>
           <li>Active</li>
           <li>Completed</li>
@@ -44,11 +42,11 @@
         <button>Clear completed</button>
       </footer>
       </section>
-      <footer><h6>DOCUMENT Footer</h6>
+      <footer>
       <p>Double-click to edit a todo</p>
       <p>Attribution info here: </p>
       <p>Attribution info here:</p>
-    <br/><h6>End footer</h6>
+    <br/>
     </footer>
     <script src="./dist/build.js"></script>
   </body>
