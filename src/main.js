@@ -5,7 +5,7 @@ require('../index.html');
 window.app = new Vue({
 
   data: {
-    todos: [1,2,3],
+    todos: [],
     newTodo: ''
   },
   watch:{},
@@ -14,11 +14,14 @@ window.app = new Vue({
   methods:{
     addTodo: function() {
       if (this.newTodo === '') {
+        console.log('newTodo: empty');
         return(1);
       }
-      this.todos.push(
-        this.newTodo
-      );
+      var value = this.newTodo;
+      this.todos.push({
+        title: value,
+        completed: false
+      });
       this.newTodo = '';
       return(0);
     },

@@ -7,7 +7,10 @@
     <section id="todoapp" class="todoapp"> <h6>SECTION: todo input box</h6>
       <header><h6>Header</h6>
         <h1>todos</h1>
-          <input v-model="newTodo" @keyup.enter="addTodo" @keydown.esc="clearTodo"><br/>
+          <input
+          v-model="newTodo"
+          @keyup.enter="addTodo"
+          @keydown.esc="clearTodo"><br/>
         <p>{{ newTodo }}</p>
         <h6>end header</h6>
       </header>
@@ -17,7 +20,7 @@
         <ul>
           <li v-for="todo in todos">
             <div>
-             <input type="checkbox"> Toggle
+             <input class="toggle" type="checkbox" v-model="todo.completed"> Toggle
              <label><strong>{{todo}}</strong></label>
              <button @click="removeTodo(todo)"></button>Destroy list item
            </div>
