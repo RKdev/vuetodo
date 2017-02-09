@@ -7,7 +7,7 @@
     <section id="todoapp" class="todoapp">
       <header>
         <h1>todos</h1>
-        <p>{{visibility}}</p>
+        <p>{{currentRoute}}</p>
           <input
           v-model.trim="newTodo"
           @keyup.enter="addTodo"
@@ -36,9 +36,9 @@
       <footer>
         <span><h5>Todo Count</h5></span>
         <ul>
-          <li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
-          <li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
-          <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
+          <li><a href="#/all" v-bind:anything="{ selected: currentRoute == 'all' }">All</a></li>
+          <li><a href="#/active" :anything="{ selected: currentRoute == 'active' }">Active</a></li>
+          <li><a href="#/completed" :anything="{ selected: currentRoute == 'completed' }">Completed</a></li>
         </ul>
         <button>Clear completed</button>
       </footer>

@@ -7,11 +7,11 @@ function onHashChange() {
   var route = window.location.hash.replace(/#\/?/, ''); //strip out the # and /
   console.log(window.location.hash);
   console.log(route);
-  if (routes[route]) {  //check filters list for routes
-    app.route = route;
+  if (routes[route]) {  //check routes list
+    app.currentRoute = route;
   } else {
     window.location.hash = '';
-    app.route = 'all';
+    app.currentRoute = 'all';
   }
 }
 
@@ -26,7 +26,7 @@ window.app = new Vue({
   data: {
     todos: [],
     newTodo: '',
-    visibility: false
+    currentRoute: false
   },
   watch:{},
   computed:{},
