@@ -2,18 +2,38 @@
 import Vue from 'vue';
 require('../index.html');
 
+// handle routing
+function onHashChange() {
+  var route = window.location.hash.replace(/#\/?/, ''); //strip out the # and /
+  console.log(window.location.hash);
+  console.log(route);
+  if (routes[route]) {  //check filters list for routes
+    app.route = route;
+  } else {
+    window.location.hash = '';
+    app.route = 'all';
+  }
+}
+
+window.addEventListener('hashchange', onHashChange);
+var routes = {
+  all: 'all',
+  active: 'active',
+  completed: 'completed'
+};
 window.app = new Vue({
 
   data: {
     todos: [],
-    newTodo: ''
+    newTodo: '',
+    visibility: false
   },
   watch:{},
   computed:{},
   filters:{},
   methods:{
     addTodo: function() {
-      var value = this.newTodo && this.newTodo.trim();
+      var value = this.newTodo;
       if (!value) {
         console.log('newTodo: empty');
         return(1);
@@ -37,3 +57,4 @@ window.app = new Vue({
 });
 
 app.$mount('#todoapp');
+onHashChange();
