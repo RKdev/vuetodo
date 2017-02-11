@@ -35,7 +35,7 @@
       <!-- the VUE component is mounted to. It has to close here so the rest of the -->
       <!-- document will be in scope -->
       <footer>
-        <span><h5>Todo Count</h5></span>
+        <span v-show="todos.length"><h5>Todo Count: {{remaining}}</h5></span>
         <ul>
           <li><a href="#/all">All</a></li>
           <li><a href="#/active">Active</a></li>
