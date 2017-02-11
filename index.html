@@ -15,7 +15,7 @@
          <p>{{ newTodo }}</p>
       </header>
       <section>
-        <input type="checkbox">Toggle all
+        <input type="checkbox" v-model="allDone">Toggle all: {{allDone}}
         <ul>
           <li v-for="todo in filteredTodos">
             <div>
