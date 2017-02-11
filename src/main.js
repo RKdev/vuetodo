@@ -11,9 +11,33 @@ function onHashChange() {
     app.currentRoute = route;
   } else {
     window.location.hash = '';
-    app.currentRoute = 'all';
+    app.currentroute = 'all';
   }
 }
+
+/*.filter is an arrayPrototype function.
+   filters receives an array of all todos, then returns a new array of
+   elements that pass the filter
+*/
+
+var filters = {
+  //no filter - returns everything
+  all: function (todos) {
+    return todos;
+  },
+  //returns everything that hasn't been completed yet (completed items disappear when checked)
+  active: function (todos) {
+    return todos.filter(function (todo) {
+      return !todo.completed;
+    });
+  },
+  //returns everything has been completed
+  completed: function (todos) {
+    return todos.filter(function (todo) {
+      return todo.completed;
+    });
+  }
+};
 
 window.addEventListener('hashchange', onHashChange);
 var routes = {
@@ -26,10 +50,14 @@ window.app = new Vue({
   data: {
     todos: [],
     newTodo: '',
-    currentRoute: false
+    currentRoute: 'all'
   },
   watch:{},
-  computed:{},
+  computed:{
+    filteredTodos: function () {
+      return filters[this.currentRoute](this.todos);
+    }
+  },
   filters:{},
   methods:{
     addTodo: function() {

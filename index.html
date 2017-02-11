@@ -12,12 +12,12 @@
           v-model.trim="newTodo"
           @keyup.enter="addTodo"
           @keydown.esc="clearTodo"><br/>
-        <p>{{ newTodo }}</p>
+         <p>{{ newTodo }}</p>
       </header>
       <section>
         <input type="checkbox">Toggle all
         <ul>
-          <li v-for="todo in todos">
+          <li v-for="todo in filteredTodos">
             <div>
              <input class="toggle" type="checkbox" v-model="todo.completed"> Toggle
              <label><strong>{{todo}}</strong></label>
@@ -30,15 +30,23 @@
       <!-- This footer was orginally inside top section. Not sure why. Leaving it here for now -->
       <!-- If I leave it as a "footer", I suppose that makes sense -->
       <!-- But I want to understand why it should be a footer instead of just a div -->
-      <!-- Update, I understand now. The top section represents the DOM element -->
-      <!-- That the VUE component is mounted to. It has to close here so the rest of the -->
+      <!-- Update, I understand now. The top section represents the DOM element that -->
+      <!-- the VUE component is mounted to. It has to close here so the rest of the -->
       <!-- document will be in scope -->
       <footer>
         <span><h5>Todo Count</h5></span>
         <ul>
-          <li><a href="#/all" v-bind:anything="{ selected: currentRoute == 'all' }">All</a></li>
-          <li><a href="#/active" :anything="{ selected: currentRoute == 'active' }">Active</a></li>
-          <li><a href="#/completed" :anything="{ selected: currentRoute == 'completed' }">Completed</a></li>
+          <li><a href="#/all">All</a></li>
+          <li><a href="#/active">Active</a></li>
+          <li><a href="#/completed">Completed</a></li>
+          <section>
+          <!-- <li><a href="#/all" :class="{ selected: currentRoute == 'all' }">All</a></li> -->
+          <!-- <li><a href="#/active" :class="{ selected: currentRoute == 'active' }">Active</a></li> -->
+          <!-- <li><a href="#/completed" :class="{ selected: currentRoute == 'completed' }">Completed</a></li> -->
+          <!-- I'm really not sure what these bind thingys are doing since the route is being set-->
+          <!-- in the JavaScript by the onHashChange function... -->
+          <!-- I think they might be for changing the CSS class -->
+          </section>
         </ul>
         <button>Clear completed</button>
       </footer>
