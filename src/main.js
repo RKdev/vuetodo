@@ -12,7 +12,7 @@ var routes = {
 //define router
 function onHashChange() {
   var route = window.location.hash.replace(/#\/?/, ''); //strip out the # and /
-  if (routes[route]) {          //check routes list
+  if (routes[route]) {           //check routes list
     app.currentRoute = route;   // set route
   } else {
     window.location.hash = '';
@@ -24,7 +24,7 @@ function onHashChange() {
 window.addEventListener('hashchange', onHashChange);
 
 /*.filter is an arrayPrototype function.
-   filters receives an array of all todos, then returns a new array of
+   filter receives an array of all todos, then returns a new array of
    elements that pass the filter
 */
 
@@ -56,7 +56,7 @@ window.app = new Vue({
     todos: [],
     newTodo: '',
     currentRoute: 'all' //define this as a real route, or else vue will cough
-                        // when it can't find this value in the "filters" object
+                       // when it can't find this value in the "filters" object
   },
   watch:{},
   computed:{
@@ -107,6 +107,11 @@ window.app = new Vue({
     clearTodo: function(){
       //use reactive property of vue data elements to clear the bound input box
       this.newTodo = '';
+    },
+    removeCompleted: function () {
+      //creates an array of the current active elements
+     // and overwrites the todos array
+      this.todos = filters.active(this.todos);
     }
   },
   directives:{}
