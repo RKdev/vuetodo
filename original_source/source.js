@@ -135,6 +135,7 @@ function onHashChange() {
     app.visibility = 'all';
   }
 }
+
 window.addEventListener('hashchange', onHashChange);
 onHashChange();
 // mount

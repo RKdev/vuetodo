@@ -1,4 +1,4 @@
-/*jshint esversion:6*/ //tells linter to be quite about node syntax
+/*jshint esversion:6*/ //tells linter to be quiet about node syntax
 import Vue from 'vue';
 require('../index.html'); //tells webpack hot loader to reset on html changes too
 
@@ -12,8 +12,9 @@ var routes = {
 //define router
 function onHashChange() {
   var route = window.location.hash.replace(/#\/?/, ''); //strip out the # and /
-  if (routes[route]) {           //check routes list
+  if (routes[route]) {           //check routes list for valid route
     app.currentRoute = route;   // set route
+                               //really it sets a string that gets passed to the "filters" object
   } else {
     window.location.hash = '';
     app.currentroute = 'all';
@@ -55,8 +56,9 @@ window.app = new Vue({
   data: {
     todos: [],
     newTodo: '',
-    currentRoute: 'all' //define this as a real route, or else vue will cough
+    currentRoute: 'all', //define this as a real route, or else vue will cough
                        // when it can't find this value in the "filters" object
+    editedTodo: false
   },
   watch:{},
   computed:{
@@ -112,9 +114,35 @@ window.app = new Vue({
       //creates an array of the current active elements
      // and overwrites the todos array
       this.todos = filters.active(this.todos);
+    },
+    editTodo: function (todo) {
+      this.beforeEditCache = todo.title;
+      this.editedTodo = todo;
+      console.log(todo.title);
+    },
+    cancelEdit: function (todo) {
+      this.editedTodo = false;
+      todo.title = this.beforeEditCache;
+    },
+    doneEdit: function (todo) {
+      if (!this.editedTodo) {
+        return;
+      }
+      this.editedTodo = null;
+      todo.title = todo.title.trim();
+      if (!todo.title) {
+        this.removeTodo(todo);
+      }
     }
   },
-  directives:{}
+  directives:{
+    'todo-focus': function (el, expression){
+      if (expression.value === true) {
+        console.log(expression);
+        el.focus();
+      }
+    }
+  }
 });
 
 app.$mount('#todoapp');

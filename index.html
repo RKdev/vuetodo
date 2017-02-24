@@ -7,7 +7,6 @@
     <section id="todoapp" class="todoapp">
       <header>
         <h1>todos</h1>
-        <p>{{currentRoute}}</p>
           <input
           v-model.trim="newTodo"
           @keyup.enter="addTodo"
@@ -21,10 +20,18 @@
           <li v-for="todo in filteredTodos">
             <div>
              <input class="toggle" type="checkbox" v-model="todo.completed"> Toggle
-             <label><strong>{{todo}}</strong></label>
+             <label @dblclick="editTodo(todo)"><strong>{{todo}}</strong></label>
              <button @click="removeTodo(todo)"></button>Destroy list item
            </div>
-           <input>List Item Edit Box
+           <input
+            type="text"
+            v-show="editedTodo"
+            v-model="todo.title"
+            v-todo-focus="todo == editedTodo"
+            @blur="doneEdit(todo)"
+            @keyup.enter="doneEdit(todo)"
+            @keyup.esc="cancelEdit(todo)"
+           >List Item Edit Box
           </li>
         </ul>
       </section>
@@ -34,8 +41,9 @@
       <!-- Update, I understand now. The top section represents the DOM element that -->
       <!-- the VUE component is mounted to. It has to close here so the rest of the -->
       <!-- document will be in scope -->
-      <footer>
+      <footer v-show = "todos.length">
         <span v-show="todos.length"><h5>Todo Count: {{remaining}}</h5></span>
+        <!-- Shows a count of todos, but only if at least 1 exists -->
         <ul>
           <li><a href="#/all">All</a></li>
           <li><a href="#/active">Active</a></li>
@@ -44,9 +52,11 @@
           <!-- <li><a href="#/all" :class="{ selected: currentRoute == 'all' }">All</a></li> -->
           <!-- <li><a href="#/active" :class="{ selected: currentRoute == 'active' }">Active</a></li> -->
           <!-- <li><a href="#/completed" :class="{ selected: currentRoute == 'completed' }">Completed</a></li> -->
+          <!--  -->
           <!-- I'm really not sure what these bind thingys are doing since the route is being set-->
           <!-- in the JavaScript by the onHashChange function... -->
           <!-- I think they might be for changing the CSS class -->
+          <!-- Still don't entirely understand the syntax though -->
           </section>
         </ul>
       </footer>
