@@ -128,7 +128,7 @@ window.app = new Vue({
       if (!this.editedTodo) {
         return;
       }
-      this.editedTodo = null;
+      this.editedTodo = false;
       todo.title = todo.title.trim();
       if (!todo.title) {
         this.removeTodo(todo);
@@ -138,6 +138,12 @@ window.app = new Vue({
   directives:{
     'todo-focus': function (el, expression){
       if (expression.value === true) {
+        console.log(expression);
+        el.focus();
+      }
+    },
+    'todo-input-focus': function (el, expression){
+      if (expression.value === false) {
         console.log(expression);
         el.focus();
       }
