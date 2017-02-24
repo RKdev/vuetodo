@@ -58,7 +58,8 @@ window.app = new Vue({
     newTodo: '',
     currentRoute: 'all', //define this as a real route, or else vue will cough
                        // when it can't find this value in the "filters" object
-    editedTodo: false
+    editedTodo: false,
+    beforeEditCache: ''
   },
   watch:{},
   computed:{
@@ -138,13 +139,11 @@ window.app = new Vue({
   directives:{
     'todo-focus': function (el, expression){
       if (expression.value === true) {
-        console.log(expression);
         el.focus();
       }
     },
     'todo-input-focus': function (el, expression){
       if (expression.value === false) {
-        console.log(expression);
         el.focus();
       }
     }
