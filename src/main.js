@@ -1,6 +1,7 @@
 /*jshint esversion:6*/ //tells linter to be quiet about node syntax
 import Vue from 'vue';
 require('../index.html'); //tells webpack hot loader to reset on html changes too
+require('../index.css');
 
 // routes
 var routes = {
@@ -23,6 +24,19 @@ function onHashChange() {
 
 //instantiate router
 window.addEventListener('hashchange', onHashChange);
+
+//localStorage
+
+var STORAGE_KEY = 'todos-vuejs-2.1';
+var todoStorage = {
+  fetch: function () {
+    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    return todos;
+  },
+  save: function (todos) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  }
+};
 
 /*.filter is an arrayPrototype function.
    filter receives an array of all todos, then returns a new array of
@@ -54,14 +68,20 @@ var filters = {
 window.app = new Vue({
 
   data: {
-    todos: [],
+    todos: todoStorage.fetch(),
     newTodo: '',
     currentRoute: 'all', //define this as a real route, or else vue will cough
                        // when it can't find this value in the "filters" object
     editedTodo: false,
     beforeEditCache: ''
   },
-  watch:{},
+  watch:{
+    todos: {
+      handler: function (todos) {
+        todoStorage.save(todos);
+      }
+    }
+  },
   computed:{
     /* passes the current route to the "filters" object and runs
        the associated function to return a filtered list of todo items

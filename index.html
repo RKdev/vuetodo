@@ -2,12 +2,14 @@
 <html>
   <head>
     <title>VueTodo</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
   </head>
   <body>
-    <section id="todoapp" class="todoapp">
+    <section id="todoapp">
       <header>
         <h1>todos</h1>
           <input
+          placeholder="What needs to be done?"
           v-model.trim="newTodo"
           v-todo-input-focus="editedTodo"
           @keyup.enter="addTodo"
@@ -20,7 +22,7 @@
         <ul>
           <li v-for="todo in filteredTodos">
             <div>
-             <input class="toggle" type="checkbox" v-model="todo.completed"> Toggle
+             <input type="checkbox" v-model="todo.completed"> Toggle
              <label @dblclick="editTodo(todo)"><strong>{{todo}}</strong></label>
              <button @click="removeTodo(todo)"></button>Destroy list item
            </div>
