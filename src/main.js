@@ -1,7 +1,7 @@
-/*jshint esversion:6*/ //tells linter to be quiet about node syntax
+/*jshint esversion:6*/     //tells linter to be quiet about node syntax
 import Vue from 'vue';
-require('../index.html'); //tells webpack hot loader to reset on html changes too
-require('../index.css');
+require('../index.html'); //tells webpack hot loader to reset on html changes
+require('../index.css'); //tells webpack hot loader to reset on css changes
 
 // routes
 var routes = {
@@ -114,8 +114,8 @@ window.app = new Vue({
   methods:{
     addTodo: function() {
       var value = this.newTodo;
-      if (!value) {
-        console.log('newTodo: empty');
+      if (value === '') {
+        return('newTodo: empty');
       }
       this.todos.push({
         title: value,
