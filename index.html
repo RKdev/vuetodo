@@ -5,28 +5,29 @@
     <link rel="stylesheet" type="text/css" href="index.css">
   </head>
   <body>
-    <section id="todoapp">
+    <section id="todoapp" class="todoapp">
       <header>
         <h1>todos</h1>
           <input
+          class="new-todo"
           placeholder="What needs to be done?"
           v-model.trim="newTodo"
           v-todo-input-focus="editedTodo"
           @keyup.enter="addTodo"
           @keydown.esc="clearTodo"><br/>
-         <p>{{ newTodo }}</p>
       </header>
-      <section>
-        <input type="checkbox" v-model="allDone">Toggle all: {{allDone}}
-        <button @click="removeCompleted" v-show="todos.length > remaining">Clear completed</button>
-        <ul>
-          <li v-for="todo in filteredTodos">
-            <div>
-             <input type="checkbox" v-model="todo.completed"> Toggle
-             <label @dblclick="editTodo(todo)"><strong>{{todo}}</strong></label>
-             <button @click="removeTodo(todo)"></button>Destroy list item
+      <section class="main">
+        <input class="toggle-all" type="checkbox" v-model="allDone">
+        <ul class="todo-list">
+          <li class="todo" v-for="todo in filteredTodos"
+          :class="{ completed: todo.completed, editing: todo == editedTodo }">
+            <div class="view">
+             <input class="toggle" type="checkbox" v-model="todo.completed">
+             <label @dblclick="editTodo(todo)"><strong>{{todo.title}}</strong></label>
+             <button class="destroy" @click="removeTodo(todo)"></button>
            </div>
            <input
+            class="edit"
             type="text"
             v-show="editedTodo"
             v-model="todo.title"
@@ -34,7 +35,7 @@
             @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)"
             @keyup.esc="cancelEdit(todo)"
-           >List Item Edit Box
+           >
           </li>
         </ul>
       </section>
@@ -44,27 +45,31 @@
       <!-- Update, I understand now. The top section represents the DOM element that -->
       <!-- the VUE component is mounted to. It has to close here so the rest of the -->
       <!-- document will be in scope -->
-      <footer v-show = "todos.length">
-        <span v-show="todos.length"><h5>Todo Count: {{remaining}}</h5></span>
+      <footer class="footer">
+        <span class="todo-count" v-show="todos.length">Todo Count: {{remaining}}</span>
         <!-- Shows a count of todos, but only if at least 1 exists -->
-        <ul>
-          <li><a href="#/all">All</a></li>
-          <li><a href="#/active">Active</a></li>
-          <li><a href="#/completed">Completed</a></li>
-          <section>
-          <!-- <li><a href="#/all" :class="{ selected: currentRoute == 'all' }">All</a></li> -->
-          <!-- <li><a href="#/active" :class="{ selected: currentRoute == 'active' }">Active</a></li> -->
-          <!-- <li><a href="#/completed" :class="{ selected: currentRoute == 'completed' }">Completed</a></li> -->
-          <!--  -->
-          <!-- I'm really not sure what these bind thingys are doing since the route is being set-->
-          <!-- in the JavaScript by the onHashChange function... -->
-          <!-- I think they might be for changing the CSS class -->
-          <!-- Still don't entirely understand the syntax though -->
-          </section>
-        </ul>
+        <nav>
+          <ul class="filters">
+            <!-- <section> -->
+            <li><a href="#/all" :class="{ selected: currentRoute == 'all' }">All</a></li>
+            <li><a href="#/active" :class="{ selected: currentRoute == 'active' }">Active</a></li>
+            <li><a href="#/completed" :class="{ selected: currentRoute == 'completed' }">Completed</a></li>
+            <!--  -->
+            <!-- I'm really not sure what these bind thingys are doing since the route is being set-->
+            <!-- in the JavaScript by the onHashChange function... -->
+            <!-- I think they might be for changing the CSS class -->
+            <!-- Still don't entirely understand the syntax though -->
+            <!--  The bind thingys make the selection "stick" so that the styling stays applied to the selected href tag-->
+            <!--  The values in brackets matter. "selected" appears to be bound to the actual href -->
+            <!--  The variable "currentRoute" is a reference to the actual variable in JavaScript-->
+            <!-- </section> -->
+          </ul>
+        </nav>
+        <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">Clear completed</button>
+
       </footer>
       </section>
-      <footer>
+      <footer class="info">
       <p>Double-click to edit a todo</p>
       <p>Attribution info here: </p>
       <p>Attribution info here:</p>

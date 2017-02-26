@@ -18,7 +18,7 @@ function onHashChange() {
                                //really it sets a string that gets passed to the "filters" object
   } else {
     window.location.hash = '';
-    app.currentroute = 'all';
+    app.currentRoute = 'all';
   }
 }
 
